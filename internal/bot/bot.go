@@ -157,19 +157,19 @@ func registerHandlers(d *ext.Dispatcher, deps *handlers.Deps, cbRouter *callback
 	d.AddHandler(newCommandHandler("stats", auth(deps.Stats)))
 	d.AddHandler(newCommandHandler("disk", auth(deps.Disk)))
 
-	// ── Owner-only commands ───────────────────────────────────────────────
-	d.AddHandler(newCommandHandler("auth", auth(deps.Auth)))
-	d.AddHandler(newCommandHandler("unauth", auth(deps.Unauth)))
-	d.AddHandler(newCommandHandler("setworkers", auth(deps.SetWorkers)))
-	d.AddHandler(newCommandHandler("setqueue", auth(deps.SetQueue)))
-	d.AddHandler(newCommandHandler("setdownloadlimit", auth(deps.SetDownloadLimit)))
-	d.AddHandler(newCommandHandler("setuploadlimit", auth(deps.SetUploadLimit)))
-	d.AddHandler(newCommandHandler("users", auth(deps.Users)))
-	d.AddHandler(newCommandHandler("broadcast", auth(deps.Broadcast)))
-	d.AddHandler(newCommandHandler("clean", auth(deps.Clean)))
-	d.AddHandler(newCommandHandler("settings", auth(deps.Settings)))
-	d.AddHandler(newCommandHandler("restart", auth(deps.Restart)))
-	d.AddHandler(newCommandHandler("shutdown", auth(deps.Shutdown)))
+// ── Owner-only commands ───────────────────────────────────────────────
+d.AddHandler(newCommandHandler("auth", auth(deps.Authorize)))
+d.AddHandler(newCommandHandler("unauth", auth(deps.Unauth)))
+d.AddHandler(newCommandHandler("setworkers", auth(deps.SetWorkers)))
+d.AddHandler(newCommandHandler("setqueue", auth(deps.SetQueue)))
+d.AddHandler(newCommandHandler("setdownloadlimit", auth(deps.SetDownloadLimit)))
+d.AddHandler(newCommandHandler("setuploadlimit", auth(deps.SetUploadLimit)))
+d.AddHandler(newCommandHandler("users", auth(deps.Users)))
+d.AddHandler(newCommandHandler("broadcast", auth(deps.Broadcast)))
+d.AddHandler(newCommandHandler("clean", auth(deps.Clean)))
+d.AddHandler(newCommandHandler("settings", auth(deps.Settings)))
+d.AddHandler(newCommandHandler("restart", auth(deps.Restart)))
+d.AddHandler(newCommandHandler("shutdown", auth(deps.Shutdown)))
 
 	// ── File uploads (document, video, audio, photo) ──────────────────────
 	d.AddHandler(newMessageHandler(
