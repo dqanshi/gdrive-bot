@@ -3,7 +3,7 @@ module gdrive-bot
 go 1.24
 
 require (
-	github.com/PaulSonOfLars/gotgbot/v2 v2.0.0-rc.30
+	github.com/PaulSonOfLars/gotgbot/v2 v2.0.0-rc.35
 	github.com/joho/godotenv v1.5.1
 	github.com/redis/go-redis/v9 v9.21.0
 	github.com/shirou/gopsutil/v3 v3.24.5
