@@ -1,0 +1,22 @@
+# Build output
+build/
+*.exe
+
+# Local environment (contains secrets — never commit)
+config/.env
+config/rclone.conf
+
+# Downloaded temp files
+downloads/
+
+# Logs
+logs/
+
+# Go module cache
+vendor/
+
+# Editor
+.idea/
+.vscode/
+*.swp
+*.swo

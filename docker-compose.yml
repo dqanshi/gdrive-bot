@@ -1,0 +1,43 @@
+version: "3.9"
+
+services:
+  bot:
+    build: .
+    restart: unless-stopped
+    env_file:
+      - config/.env
+    volumes:
+      - ./config:/app/config
+      - ./downloads:/app/downloads
+      - ./logs:/app/logs
+    depends_on:
+      - mongo
+      - redis
+    networks:
+      - botnet
+
+  mongo:
+    image: mongo:7
+    restart: unless-stopped
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - botnet
+    # Not exposed to the host — only accessible to the bot container.
+
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    command: redis-server --save 60 1 --loglevel warning
+    volumes:
+      - redis_data:/data
+    networks:
+      - botnet
+
+volumes:
+  mongo_data:
+  redis_data:
+
+networks:
+  botnet:
+    driver: bridge

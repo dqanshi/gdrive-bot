@@ -1,0 +1,40 @@
+# ────────────────────────────────────────────────────────────────────────────
+# Systemd unit for gdrive-bot (non-Docker deployment on a bare VPS).
+#
+# Install:
+#   cp gdrive-bot.service /etc/systemd/system/
+#   systemctl daemon-reload
+#   systemctl enable --now gdrive-bot
+#
+# Logs:
+#   journalctl -fu gdrive-bot
+# ────────────────────────────────────────────────────────────────────────────
+[Unit]
+Description=Private Telegram Google Drive Manager Bot
+After=network-online.target mongod.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=gdrive-bot
+Group=gdrive-bot
+WorkingDirectory=/opt/gdrive-bot
+ExecStart=/opt/gdrive-bot/gdrive-bot
+Restart=always
+RestartSec=5
+
+# Load credentials from the env file — keeps the unit file free of secrets.
+EnvironmentFile=/opt/gdrive-bot/config/.env
+
+# Resource limits — tune to your VPS size.
+LimitNOFILE=65535
+MemoryMax=512M
+
+# Basic hardening
+PrivateTmp=true
+NoNewPrivileges=true
+ProtectSystem=strict
+ReadWritePaths=/opt/gdrive-bot/downloads /opt/gdrive-bot/logs /opt/gdrive-bot/config
+
+[Install]
+WantedBy=multi-user.target
