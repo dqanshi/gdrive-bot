@@ -38,7 +38,7 @@ func commandArg(ctx *ext.Context) string {
 
 // ─── Auth management ─────────────────────────────────────────────────────────
 
-func (d *Deps) Auth(b *gotgbot.Bot, ctx *ext.Context) error {
+func (d *Deps) Authorize(b *gotgbot.Bot, ctx *ext.Context) error {
 	if !d.requireOwner(b, ctx) {
 		return nil
 	}
@@ -55,7 +55,8 @@ func (d *Deps) Auth(b *gotgbot.Bot, ctx *ext.Context) error {
 		return err
 	}
 	d.Guard.Invalidate(c, targetID)
-	_, err = ctx.EffectiveMessage.Reply(b, fmt.Sprintf("✅ User <code>%d</code> authorized.", targetID),
+	_, err = ctx.EffectiveMessage.Reply(b,
+		fmt.Sprintf("✅ User <code>%d</code> authorized.", targetID),
 		&gotgbot.SendMessageOpts{ParseMode: "HTML"})
 	return err
 }
