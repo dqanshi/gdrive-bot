@@ -1,5 +1,6 @@
 module gdrive-bot
 
+go 1.25.0
 go 1.25.8
 go 1.24
 
@@ -10,6 +11,7 @@ require (
 	github.com/shirou/gopsutil/v3 v3.24.5
 	go.mongodb.org/mongo-driver v1.17.9
 	golang.org/x/oauth2 v0.36.0
+	google.golang.org/api v0.197.0
 	google.golang.org/api v0.286.0
 )
 
